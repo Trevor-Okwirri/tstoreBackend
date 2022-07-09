@@ -127,7 +127,7 @@ router.post('/login', async (req, res) => {
 
 generateAccessToken = (user) => {
   return jwt.sign({ user }, 'trevorokwirri@1234', {
-    expiresIn: '30s',
+    expiresIn: '30m',
   });
 };
 
