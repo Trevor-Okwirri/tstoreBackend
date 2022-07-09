@@ -69,10 +69,7 @@ router.post('/api/login', async (req, res) => {
           });
         } else {
           const accessToken = generateAccessToken(user);
-          const refreshToken = jwt.sign(
-            user.email,
-            process.env.REFRESH_TOKEN_SECRET
-          );
+          const refreshToken = jwt.sign(user.email, 'trevorokwirri@1234');
           const refreshTokens = user.refreshTokens;
           refreshTokens.push(refreshToken);
           await User.findOneAndUpdate(
@@ -106,11 +103,9 @@ router.post('/api/login', async (req, res) => {
           });
         } else {
           const accessToken = generateAccessToken(user);
-          const refreshToken = jwt.sign(
-            user.email,
-            process.env.REFRESH_TOKEN_SECRET,
-            { expiryIn: '7d' }
-          );
+          const refreshToken = jwt.sign(user.email, 'trevorokwirri@1234', {
+            expiryIn: '7d',
+          });
           const refreshTokens = user.refreshTokens;
           refreshTokens.push(refreshToken);
           await User.findOneAndUpdate(
@@ -134,7 +129,7 @@ router.post('/api/login', async (req, res) => {
 });
 
 generateAccessToken = (user) => {
-  return jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, {
+  return jwt.sign({ user }, 'trevorokwirri@1234', {
     expiresIn: '30s',
   });
 };
