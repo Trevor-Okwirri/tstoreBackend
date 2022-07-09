@@ -19,7 +19,7 @@ app.listen(7000, () => {
   console.log(`Server listening on port 7000`);
 });
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send('Server listening on port 7000');
 });
 
