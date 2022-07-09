@@ -12,18 +12,16 @@ const app = express();
 mongoose.connect(
   'mongodb+srv://trevorokwirri:tresh@database1.zm15qv1.mongodb.net/?retryWrites=true&w=majority'
 );
-app.use(cors);
+//installing our routes
+app.use(cors());
 app.use(express.json());
-app.use('/', router);
+app.get('/', (req, res) => res.send('Server listening on port 7000'));
+app.use('/api', router);
 app.listen(7000, () => {
   console.log(`Server listening on port 7000`);
 });
 
-app.get('/', (req, res) => {
-  res.send('Server listening on port 7000');
-});
-
-router.post('/api/token', async (req, res) => {
+router.post('/token', async (req, res) => {
   const refreshToken = req.body.token;
   if (refreshToken == null) {
     return res.sendStatus(401);
@@ -37,7 +35,7 @@ router.post('/api/token', async (req, res) => {
   }
 });
 
-router.delete('/api/logout', async (req, res) => {
+router.delete('/logout', async (req, res) => {
   const refreshToken = req.body.token;
   user = await User.findOne({ refreshTokens: refreshToken });
   Tokens = user.refreshTokens;
@@ -46,7 +44,7 @@ router.delete('/api/logout', async (req, res) => {
   res.send('Token succesfully deleted');
 });
 
-router.post('/api/login', async (req, res) => {
+router.post('/login', async (req, res) => {
   res.send("It's working");
   users = await User.find();
   try {
