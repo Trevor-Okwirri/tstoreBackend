@@ -9,12 +9,18 @@ const cors = require('cors');
 const router = express.Router();
 const app = express();
 
-mongoose.connect(process.env.MONGODB_CONNECTION + '/t-store');
+mongoose.connect(
+  'mongodb+srv://trevorokwirri:tresh@database1.zm15qv1.mongodb.net/?retryWrites=true&w=majority'
+);
 app.use(cors);
 app.use(express.json());
 app.use('/', router);
-app.listen(process.env.AUTH_PORT, () => {
-  console.log(`Sever listening on port ${process.env.AUTH_PORT}`);
+app.listen(7000, () => {
+  console.log(`Server listening on port 7000`);
+});
+
+router.get('/', (req, res) => {
+  res.send('Server listening on port 7000');
 });
 
 router.post('/api/token', async (req, res) => {
