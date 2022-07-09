@@ -45,7 +45,6 @@ router.delete('/logout', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  res.send("It's working");
   users = await User.find();
   try {
     if (req.body.email != null) {
